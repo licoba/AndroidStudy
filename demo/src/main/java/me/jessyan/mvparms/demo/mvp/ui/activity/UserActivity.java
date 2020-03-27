@@ -55,6 +55,7 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  */
 public class UserActivity extends BaseActivity<UserPresenter> implements UserContract.View, SwipeRefreshLayout.OnRefreshListener {
 
+    //这里是butterknife 的特性，来代替findviewbyid
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
     @BindView(R.id.swipeRefreshLayout)

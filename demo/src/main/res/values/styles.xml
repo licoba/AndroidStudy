@@ -14,4 +14,9 @@
         <item name="android:activityCloseEnterAnimation">@anim/translate_left_to_center</item>
         <item name="android:activityCloseExitAnimation">@anim/translate_center_to_right</item>
     </style>
+
+    <style name="toolbar_theme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <!--设置返回按钮的颜色-->
+        <item name="colorControlNormal">@color/WhiteText</item>
+    </style>
 </resources>

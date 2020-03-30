@@ -92,6 +92,7 @@ dependencies {
     //依赖 arms-imageloader-glide 后还需要在 GlobalConfiguration 中手动注册 GlideImageLoaderStrategy
 //    implementation 'me.jessyan:arms-imageloader-glide:2.5.2'
     implementation project(':arms-imageloader-glide')
+    implementation 'us.feras.mdv:markdownview:1.1.0'
 
     //test
     testImplementation rootProject.ext.dependencies["junit"]

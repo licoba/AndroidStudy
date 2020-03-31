@@ -78,6 +78,7 @@ public class UserActivity extends BaseActivity<UserPresenter> implements UserCon
                 .view(this)
                 .build()
                 .inject(this);
+        return;
     }
 
     @Override
@@ -89,7 +90,7 @@ public class UserActivity extends BaseActivity<UserPresenter> implements UserCon
     public void initData(@Nullable Bundle savedInstanceState) {
         initRecyclerView();
         mRecyclerView.setAdapter(mAdapter);
-        initPaginate();
+//        initPaginate();
     }
 
 

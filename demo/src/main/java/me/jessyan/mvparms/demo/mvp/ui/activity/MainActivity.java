@@ -3,6 +3,7 @@ package me.jessyan.mvparms.demo.mvp.ui.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import com.jess.arms.base.BaseActivity;
+import com.jess.arms.base.DefaultAdapter;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -57,6 +59,12 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         initRecyclerView();
+        ((DefaultAdapter)mAdapter).setOnItemClickListener(new DefaultAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull View view, int viewType, @NonNull Object data, int position) {
+                mPresenter.onItemClicked(view,viewType,data,position);
+            }
+        });
         mRecyclerView.setAdapter(mAdapter);
     }
 

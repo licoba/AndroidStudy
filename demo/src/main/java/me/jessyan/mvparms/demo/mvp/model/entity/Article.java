@@ -17,6 +17,8 @@ package me.jessyan.mvparms.demo.mvp.model.entity;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
+
 /**
  * ================================================
  * Article 实体类
@@ -26,7 +28,8 @@ import org.jetbrains.annotations.NotNull;
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * ================================================
  */
-public class Article {
+public class Article implements Serializable {
+
     private  int id;
     private  String title;
     private  String createTime = "20200101000000";

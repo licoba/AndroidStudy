@@ -2,7 +2,7 @@
 >author：licoba
 >
 >cerate time：2020/03/21
----
+
 ## 1、JVM和DVM介绍
 
 JVM是 `Java Virtual Machine` 的简称，翻译成中文是Java虚拟机。

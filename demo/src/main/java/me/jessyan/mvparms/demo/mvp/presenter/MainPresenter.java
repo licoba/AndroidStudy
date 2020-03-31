@@ -1,8 +1,11 @@
 package me.jessyan.mvparms.demo.mvp.presenter;
 
 import android.app.Application;
+import android.content.Intent;
 import android.util.Log;
+import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ComponentActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
@@ -25,6 +28,7 @@ import me.jessyan.mvparms.demo.mvp.contract.MainContract;
 import me.jessyan.mvparms.demo.mvp.contract.UserContract;
 import me.jessyan.mvparms.demo.mvp.model.entity.Article;
 import me.jessyan.mvparms.demo.mvp.model.entity.User;
+import me.jessyan.mvparms.demo.mvp.ui.activity.ContentActivity;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
@@ -83,10 +87,15 @@ public class MainPresenter extends BasePresenter<MainContract.Model, MainContrac
         }, mRootView.getRxPermissions(), mErrorHandler);
     }
 
+    public void onItemClicked(@NonNull View view, int viewType, @NonNull Object data, int position){
+        Log.e(TAG,"点击了item"+position);
+        Intent intent = new Intent(AppManager.getAppManager().getCurrentActivity(),ContentActivity.class);
+        intent.putExtra("article",mArticles.get(position));
+        AppManager.getAppManager().startActivity(intent);
+    }
 
     private void requestFromModel(boolean pullToRefresh) {
         Log.e(TAG,"开始请求数据");
-
         mModel.getArticles()
                 .subscribeOn(Schedulers.io())
                 .retryWhen(new RetryWithDelay(3, 2))//遇到错误时重试,第一个参数为重试几次,第二个参数为重试的间隔
@@ -124,7 +133,6 @@ public class MainPresenter extends BasePresenter<MainContract.Model, MainContrac
 
                     }
                 });
-
     }
 
 

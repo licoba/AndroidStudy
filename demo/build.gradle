@@ -19,6 +19,7 @@ android {
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
         testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -92,8 +93,9 @@ dependencies {
     //依赖 arms-imageloader-glide 后还需要在 GlobalConfiguration 中手动注册 GlideImageLoaderStrategy
 //    implementation 'me.jessyan:arms-imageloader-glide:2.5.2'
     implementation project(':arms-imageloader-glide')
-    implementation 'us.feras.mdv:markdownview:1.1.0'
+//    implementation 'us.feras.mdv:markdownview:1.1.0'
 
+    implementation "io.noties.markwon:core:4.3.0"
     //test
     testImplementation rootProject.ext.dependencies["junit"]
     debugImplementation rootProject.ext.dependencies["canary-debug"]

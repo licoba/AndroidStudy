@@ -31,27 +31,29 @@ public class Article {
     private  String title;
     private  String createTime = "20200101000000";
     private  String author = "licoba";
-    private  String content;
+    private  String content = "";
+    private  String filePath;
 
-    public Article(int id, String title, String createTime, String author, String content) {
-        this.id = id;
+    public Article(String title, String createTime, String author, String content, String filePath) {
         this.title = title;
         this.createTime = createTime;
         this.author = author;
         this.content = content;
+        this.filePath = filePath;
     }
 
-    public Article(String title, String createTime, String author, String content) {
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public Article(String title, String createTime, String filePath) {
         this.title = title;
         this.createTime = createTime;
-        this.author = author;
-        this.content = content;
-    }
-
-
-    public Article(String title, String content) {
-        this.title = title;
-        this.content = content;
+        this.filePath = filePath;
     }
 
     public int getId() {
@@ -102,6 +104,7 @@ public class Article {
                 ", createTime='" + createTime + '\'' +
                 ", author='" + author + '\'' +
                 ", content='" + content + '\'' +
+                ", filePath='" + filePath + '\'' +
                 '}';
     }
 }

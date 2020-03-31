@@ -15,13 +15,19 @@
  */
 package me.jessyan.mvparms.demo.mvp.model;
 
+import android.content.res.AssetManager;
+import android.util.Log;
+
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.OnLifecycleEvent;
 
+import com.jess.arms.base.BaseApplication;
 import com.jess.arms.di.scope.ActivityScope;
+import com.jess.arms.integration.AppManager;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +48,8 @@ import me.jessyan.mvparms.demo.mvp.model.entity.Article;
 import me.jessyan.mvparms.demo.mvp.model.entity.User;
 import timber.log.Timber;
 
+import static androidx.constraintlayout.widget.Constraints.TAG;
+
 /**
  * ================================================
  * 展示 Model 的用法
@@ -61,6 +69,7 @@ public class MainModel extends BaseModel implements MainContract.Model {
         super(repositoryManager);
     }
 
+    AssetManager assetManager;
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     void onPause() {
@@ -70,9 +79,24 @@ public class MainModel extends BaseModel implements MainContract.Model {
     @Override
     public Observable<List<Article>> getArticles() {
         List<Article> articles = new ArrayList<>();
-        Article article = new Article("标题","内容");
-        articles.add(article);
 
+
+        String[] files = null;
+        try {// 遍历assest文件夹
+            files = AppManager.getAppManager().getTopActivity().getAssets().list("");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (int i = 0; i < files.length; i++) {
+            String fileName = files[i];
+            if(fileName.endsWith(".md")) {
+                String filePath = "file:///android_asset/"+fileName;
+                Article article = new Article(fileName.split(".md")[0],"20200331000000",filePath);
+                articles.add(article);
+                Log.e("fileName", " fileName: " + fileName);
+            }
+        }
 
         Observable<List<Article>> result = Observable.create(new ObservableOnSubscribe<List<Article>>() {
             @Override

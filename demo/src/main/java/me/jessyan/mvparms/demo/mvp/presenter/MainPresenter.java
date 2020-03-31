@@ -111,7 +111,7 @@ public class MainPresenter extends BasePresenter<MainContract.Model, MainContrac
                     @Override
                     public void onNext(List<Article> articles) {
                         Log.e(TAG,"请求到了数据："+articles.toString());
-
+                        mRootView.showMessage("共找到"+articles.size()+"篇文章");
                         if (pullToRefresh) {
                             mArticles.clear();//如果是下拉刷新则清空列表
                         }

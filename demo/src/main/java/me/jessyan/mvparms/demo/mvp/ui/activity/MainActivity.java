@@ -103,7 +103,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     public void showMessage(@NonNull String message) {
-
+        ArmsUtils.snackbarText(message);
     }
 
     //下拉刷新的回调

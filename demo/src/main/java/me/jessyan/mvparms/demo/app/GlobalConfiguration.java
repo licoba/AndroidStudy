@@ -18,6 +18,7 @@ package me.jessyan.mvparms.demo.app;
 import android.app.Application;
 import android.content.Context;
 
+import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
@@ -52,6 +53,7 @@ import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * ================================================
  */
+@Keep
 public final class GlobalConfiguration implements ConfigModule {
 //    public static String sDomain = Api.APP_DOMAIN;
 

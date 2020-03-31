@@ -11,6 +11,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
+import com.jess.arms.utils.ArmsUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import me.jessyan.mvparms.demo.R;
 import me.jessyan.mvparms.demo.di.component.DaggerMainComponent;
@@ -22,17 +23,22 @@ import javax.inject.Inject;
 
 
 //这里的Activity完全就只有View层的东西了，不参与其它的实现
-public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View {
+public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View,SwipeRefreshLayout.OnRefreshListener {
 
     //这里是butterknife 的特性，来代替findviewbyid
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout mSwipeRefreshLayout;
+    // 这个inject代表 mRxPermissions 是别的地方注入进来的，应该去对应的地方找了
+    // 这里有个问题放在这里，怎么去找这个mRxPermissions？ 直接说吧，就是在MainModule里提供的
+    //  @Inject 和 @Provides 是相对应的
     @Inject
     RxPermissions mRxPermissions;
-
-
+    @Inject
+    RecyclerView.LayoutManager mLayoutManager;
+    @Inject
+    RecyclerView.Adapter mAdapter;
     @Override
     public void setupActivityComponent(@NonNull AppComponent appComponent) {
         DaggerMainComponent
@@ -50,7 +56,13 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-        return;
+        initRecyclerView();
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+    private void initRecyclerView() {
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        ArmsUtils.configRecyclerView(mRecyclerView, mLayoutManager);
     }
 
 
@@ -92,5 +104,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @Override
     public void showMessage(@NonNull String message) {
 
+    }
+
+    //下拉刷新的回调
+    @Override
+    public void onRefresh() {
+        mPresenter.requestArticles(true);
     }
 }

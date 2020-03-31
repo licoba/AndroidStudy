@@ -64,6 +64,7 @@ public class UserActivity extends BaseActivity<UserPresenter> implements UserCon
     RxPermissions mRxPermissions;
     @Inject
     RecyclerView.LayoutManager mLayoutManager;
+
     @Inject
     RecyclerView.Adapter mAdapter;
 
@@ -90,7 +91,7 @@ public class UserActivity extends BaseActivity<UserPresenter> implements UserCon
     public void initData(@Nullable Bundle savedInstanceState) {
         initRecyclerView();
         mRecyclerView.setAdapter(mAdapter);
-//        initPaginate();
+        initPaginate();
     }
 
 

@@ -7,6 +7,7 @@ import androidx.core.app.ComponentActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.OnLifecycleEvent;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.AppManager;
@@ -37,6 +38,12 @@ public class MainPresenter extends BasePresenter<MainContract.Model, MainContrac
     @Inject
     Application mApplication;
 
+    //也是其它地方注入进来的
+    @Inject
+    List<Article> mArticles;
+    //也是其它地方(MainModule)注入进来的
+    @Inject
+    RecyclerView.Adapter mAdapter;
 
     @Inject
     public MainPresenter(MainContract.Model model, MainContract.View rootView) {
@@ -104,6 +111,17 @@ public class MainPresenter extends BasePresenter<MainContract.Model, MainContrac
                     @Override
                     public void onNext(List<Article> articles) {
                         Log.e(TAG,"请求到了数据："+articles.toString());
+
+                        if (pullToRefresh) {
+                            mArticles.clear();//如果是下拉刷新则清空列表
+                        }
+                        mArticles.addAll(articles);
+                        if (pullToRefresh) {
+                            mAdapter.notifyDataSetChanged();
+                        } else {
+                            mAdapter.notifyDataSetChanged();
+                        }
+
                     }
                 });
 

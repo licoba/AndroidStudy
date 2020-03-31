@@ -46,6 +46,7 @@ import me.jessyan.mvparms.demo.mvp.ui.adapter.UserAdapter;
 @Module
 public abstract class UserModule {
 
+    // @ActivityScope注解的Component类与Activity的生命周期一致
     @ActivityScope
     @Provides
     static RxPermissions provideRxPermissions(UserContract.View view) {

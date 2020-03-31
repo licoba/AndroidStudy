@@ -15,8 +15,11 @@
  */
 package me.jessyan.mvparms.demo.di.module;
 
+import android.widget.LinearLayout;
+
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jess.arms.di.scope.ActivityScope;
@@ -32,7 +35,9 @@ import me.jessyan.mvparms.demo.mvp.contract.MainContract;
 import me.jessyan.mvparms.demo.mvp.contract.UserContract;
 import me.jessyan.mvparms.demo.mvp.model.MainModel;
 import me.jessyan.mvparms.demo.mvp.model.UserModel;
+import me.jessyan.mvparms.demo.mvp.model.entity.Article;
 import me.jessyan.mvparms.demo.mvp.model.entity.User;
+import me.jessyan.mvparms.demo.mvp.ui.adapter.ArticleAdapter;
 import me.jessyan.mvparms.demo.mvp.ui.adapter.UserAdapter;
 
 /**
@@ -53,6 +58,27 @@ public abstract class MainModule {
     static RxPermissions provideRxPermissions(MainContract.View view) {
         return new RxPermissions((FragmentActivity) view.getActivity());
     }
+
+    //方法名称前面要加一个provide的方法才行
+    @ActivityScope
+    @Provides
+    static RecyclerView.LayoutManager provideLayoutManager(MainContract.View view) {
+        return new LinearLayoutManager(view.getActivity());
+    }
+
+    @ActivityScope
+    @Provides
+    static List<Article> provideArticleList() {
+        return new ArrayList<>();
+    }
+
+
+    @ActivityScope
+    @Provides
+    static RecyclerView.Adapter providemainAdapter(List<Article> list) {
+        return new ArticleAdapter(list);
+    }
+
 
     @Binds
     abstract MainContract.Model bindMainModel(MainModel model);

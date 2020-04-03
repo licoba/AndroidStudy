@@ -47,8 +47,8 @@ public class ArticleItemHolder extends BaseHolder<Article> {
 
     @BindView(R.id.card_title)
     TextView mTitle;
-    @BindView(R.id.card_content)
-    TextView mContent;
+//    @BindView(R.id.card_content)
+//    TextView mContent;
     private AppComponent mAppComponent;
 
     public ArticleItemHolder(View itemView) {
@@ -60,7 +60,7 @@ public class ArticleItemHolder extends BaseHolder<Article> {
     @Override
     public void setData(@NonNull Article data, int position) {
         mTitle.setText(data.getTitle());
-        mContent.setText(data.getContent());
+//        mContent.setText(data.getContent());
     }
 
     /**
@@ -73,6 +73,6 @@ public class ArticleItemHolder extends BaseHolder<Article> {
         //所以在 onRelease 方法中不做 clear 也是可以的, 但是在这里想展示一下 clear 的用法
         this.mTitle = null;
         this.mAppComponent = null;
-        this.mContent = null;
+//        this.mContent = null;
     }
 }

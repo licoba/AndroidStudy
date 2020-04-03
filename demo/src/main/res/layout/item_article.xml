@@ -21,8 +21,9 @@
 
         <ImageView
             android:id="@+id/card_image"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
             android:layout_gravity="center_vertical|left"
             android:layout_marginLeft="16dp"
             android:src="@mipmap/ic_launcher" />
@@ -32,35 +33,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="8dp"
             android:layout_toRightOf="@id/card_image"
-            android:gravity="center_vertical|left"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
             android:singleLine="true"
             android:text="T3384型号"
             android:textColor="@color/WhiteText"
-            android:textSize="17sp" />
+            android:textSize="22sp" />
 
     </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:padding="5dp">
-
-        <TextView
-            android:id="@+id/card_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:gravity="left"
-            android:singleLine="true"
-            android:text="沙发"
-            android:textColor="@color/WhiteText"
-            android:textSize="16sp" />
-
-
-    </LinearLayout>
 
 </LinearLayout>

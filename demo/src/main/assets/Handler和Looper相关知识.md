@@ -31,4 +31,4 @@ Handler 工作流程包括 Handler、Looper、Message、MessageQueue 四个部�
 
 ## 既然一个looper可以对应多个handler，那么looper是怎么进行区分不同的handler的？
 
-handler在sendmessage的时候，会指定message的target，也就是将当前的handler赋值给message对象，这样在handlermessage的时候，就可以根据不同的target来区分不同的handler。
+handler在sendmessage的时候，会指定message31的target，也就是将当前的handler赋值给message对象，这样在handlermessage的时候，就可以根据不同的target来区分不同的handler。+

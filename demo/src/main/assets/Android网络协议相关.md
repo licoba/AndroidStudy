@@ -4,7 +4,8 @@
 > create time：2020/04/01
 
 **废话不多说，先上图**
-![](https://uploadfiles.nowcoder.com/images/20190409/739369552_1554778302647_49E633B3CA50DFDFF26CAFEF19787BC3)
+
+![网络协议图](https://uploadfiles.nowcoder.com/images/20190409/739369552_1554778302647_49E633B3CA50DFDFF26CAFEF19787BC3)
 
 ## 网络的七层协议
 
@@ -59,4 +60,4 @@ post请求的参数包含在request body中，所以在涉及到一些敏感信�
 
 ---
 【参考文章】
-https://www.jianshu.com/p/4084a9397138
+* [TCP/IP--理解TCP三次握手和四次挥手](https://www.jianshu.com/p/4084a9397138)

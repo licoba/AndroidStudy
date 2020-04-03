@@ -8,12 +8,17 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Context;
 import android.content.res.AssetManager;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
+import com.bumptech.glide.request.target.Target;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 
@@ -25,6 +30,8 @@ import java.io.InputStreamReader;
 
 import butterknife.BindView;
 import io.noties.markwon.Markwon;
+import io.noties.markwon.image.AsyncDrawable;
+import io.noties.markwon.image.glide.GlideImagesPlugin;
 import me.jessyan.mvparms.demo.R;
 import me.jessyan.mvparms.demo.mvp.model.entity.Article;
 
@@ -38,6 +45,7 @@ public class ContentActivity extends BaseActivity {
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     private Article article;
+    Context context;
 
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +66,30 @@ public class ContentActivity extends BaseActivity {
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
+        context = this;
         article = (Article)(getIntent().getSerializableExtra("article"));
 //        Log.e(TAG,article.toString());
 //        mToolbar.setTitle(article.getTitle());
         mTitle.setText(article.getTitle());
-        final Markwon markwon = Markwon.create(this);
+        final Markwon markwon = Markwon.builder(context)
+                // automatically create Glide instance
+                .usePlugin(GlideImagesPlugin.create(context))
+                // use supplied Glide instance
+                .usePlugin(GlideImagesPlugin.create(Glide.with(context)))
+                // if you need more control
+                .usePlugin(GlideImagesPlugin.create(new GlideImagesPlugin.GlideStore() {
+                    @NonNull
+                    @Override
+                    public RequestBuilder<Drawable> load(@NonNull AsyncDrawable drawable) {
+                        return Glide.with(context).load(drawable.getDestination());
+                    }
+
+                    @Override
+                    public void cancel(@NonNull Target<?> target) {
+                        Glide.with(context).clear(target);
+                    }
+                }))
+                .build();
         String markdownText = ReadFileContent(article.getTitle()+".md");
 //        Log.e(TAG,markdownText);
         markwon.setMarkdown(mMarkdownView,markdownText);

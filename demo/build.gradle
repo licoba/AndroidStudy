@@ -96,6 +96,8 @@ dependencies {
 //    implementation 'us.feras.mdv:markdownview:1.1.0'
 
     implementation "io.noties.markwon:core:4.3.0"
+    implementation "io.noties.markwon:image-glide:4.3.0"
+
     //test
     testImplementation rootProject.ext.dependencies["junit"]
     debugImplementation rootProject.ext.dependencies["canary-debug"]

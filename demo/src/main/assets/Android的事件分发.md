@@ -63,7 +63,7 @@
 二、如果是返回了true，代表事件被ViewGroup拦截了，这里的被拦截的事件，会交给ViewGroup自己处理，也就是会走到自己的OnTouchEvent方法里面去，如果自己处理掉，返回true，则事件消耗结束；如果是返回了false或者是调用了super方法，那么会走到Activity的事件处理方法里面去。
 
 ## 总结
-- 2、dispatchTouchEvent 和 onTouchEvent 一旦return true,事件就停止传递了（没有谁能再收到这个事件）。
+- dispatchTouchEvent 和 onTouchEvent 一旦return true,事件就停止传递了（没有谁能再收到这个事件）。
 - dispatchTouchEvent 和 onTouchEvent 在return false的时候事件都回传给父控件的onTouchEvent处理。
 - 对于dispatchTouchEvent 返回 false 的含义应该是：事件停止往子View传递和分发同时开始往父控件回溯（父控件的onTouchEvent开始从下往上回传直到某个onTouchEvent return true），事件分发机制就像递归，return false 的意义就是**递归停止然后开始回溯**。
 - 对于onTouchEvent的return false，它就是不消费事件，并让事件继续往父控件的方向从下往上流动。（对比dispatchTouchEvent的returnfalse，少了一个事件传递）

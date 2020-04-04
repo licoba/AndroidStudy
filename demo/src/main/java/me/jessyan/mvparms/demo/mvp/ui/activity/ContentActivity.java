@@ -101,8 +101,8 @@ public class ContentActivity extends BaseActivity {
      * 读取文本文件中的内容
      * @方法名称: ReadTxtFile
      * @创建时间: 2014-7-17 上午11:27:13
-     * @参数列表： @param strFilePath  文件名(helloworld.txt)
      *****************************************************
+     * @参数列表： @param strFilePath  文件名(helloworld.txt)
      */
     public  String ReadFileContent(String strFilePath) {
         AssetManager am = this.getAssets();
